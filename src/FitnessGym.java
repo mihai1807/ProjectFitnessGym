@@ -1,47 +1,57 @@
-import javax.swing.text.DefaultEditorKit;
-import java.util.ArrayList;
 
 public class FitnessGym {
-    public ArrayList<Person> personsIn;
-    boolean open;
+    public final Person[] personsIn = new Person[3];
+    public boolean open;
+    public int occupation = 0;
 
-    public FitnessGym(ArrayList<Person> personsIn, boolean open) {
-        this.personsIn = personsIn;
+    public FitnessGym(Person[] personsIn, boolean open) {
         this.open = open;
     }
 
-    private void openGym() {
+    public void openGym() {
         this.open = true;
         System.out.println("The Gym is open!");
     }
 
-    private void addTrainer() {
+    public void addTrainer() {
         Trainer coach = new Trainer(UtilClass.genereazaNume(), UtilClass.genereazaVarsta(), Person.counter, UtilClass.genereazaNrAbonati());
-        if (personsIn.size() < 3) {
-            personsIn.add(coach);
+        if (personsIn[0] == null) {
+            personsIn[0] = coach;
+            System.out.println("Coach " + coach.name + " entered the Gym!");
+        } else if (personsIn[1] == null) {
+            personsIn[1] = coach;
+            System.out.println("Coach " + coach.name + " entered the Gym!");
+        } else if (personsIn[2] == null) {
+            personsIn[2] = coach;
             System.out.println("Coach " + coach.name + " entered the Gym!");
         } else {
-            System.out.println("I'm afraid the Gym is full and " + coach.name + " cannot come in!");
+            System.out.println("I'm afraid the Gym is full and coach " + coach.name + " cannot come in!");
         }
     }
 
-    private void addSub(){
+
+    public void addSub() {
         Subscriber sub = new Subscriber(UtilClass.genereazaNume(), UtilClass.genereazaVarsta(), Person.counter, UtilClass.genereazaProgres());
-        if (personsIn.size() < 3) {
-            personsIn.add(sub);
-            System.out.println("Subscriber "+sub.name+" entered the Gym");
+        if (personsIn[0] == null) {
+            personsIn[0] = sub;
+            System.out.println("Subscriber " + sub.name + " entered the Gym!");
+        } else if (personsIn[1] == null) {
+            personsIn[1] = sub;
+            System.out.println("Subscriber " + sub.name + " entered the Gym!");
+        } else if (personsIn[2] == null) {
+            personsIn[2] = sub;
+            System.out.println("Subscriber " + sub.name + " entered the Gym!");
         } else {
-            System.out.println("I'm afraid the Gym is full and " + sub.name + " cannot come in!");
+            System.out.println("I'm afraid the Gym is full and subscriber " + sub.name + " cannot come in!");
         }
     }
 
-    private void showPersons(){
-        if (personsIn.size()>0)
-        System.out.println("There are "+personsIn.size()+" in the Gym.");
-        else System.out.println("The Gym is empty!");
+    public void showPersons() {
+        for (int i = 0; i <= 2; i++) {
+            if (personsIn[i] != null) {
+                occupation++;
+            }
+        }
+        System.out.println("There are " + occupation + " people in the Gym.");
     }
-
-//    private void showTrainers() {
-//        if (personsIn.contains(Trainer.class)) System.out.println(Trainer.trainer);
-//    }
 }
