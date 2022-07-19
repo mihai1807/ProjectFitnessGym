@@ -8,6 +8,7 @@ public class Main {
     gym.addTrainer();
     gym.addSub();
     gym.showPersons();
+    gym.showCoaches();
 
     }
 }

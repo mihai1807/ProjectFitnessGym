@@ -1,4 +1,3 @@
-
 public class FitnessGym {
     public final Person[] personsIn = new Person[3];
     public boolean open;
@@ -54,4 +53,20 @@ public class FitnessGym {
         }
         System.out.println("There are " + occupation + " people in the Gym.");
     }
+
+    public void showCoaches(){
+        boolean isTrainer = false;
+        for (Person elem:personsIn) {
+            if (elem instanceof Trainer) {
+                ((Trainer) elem).printTrainer();
+                isTrainer=true;
+            }
+        }
+        if (!isTrainer) System.out.println("there are no coaches in the gym.");
+    }
+
+//    public void showMaxSub(){
+//
+//    }
+
 }
