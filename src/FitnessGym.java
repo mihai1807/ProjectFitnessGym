@@ -18,7 +18,7 @@ public class FitnessGym {
     //Created a method to set add a trainer to the gym, the trainer will be added to the array of persons in the gym, if the gym is open
     //and if the gym is not full.
     public void addTrainer() {
-        Trainer coach = new Trainer(UtilClass.generateName(), UtilClass.generateAge(), Person.counter, UtilClass.generateNoOfSubs());
+        Trainer coach = new Trainer(UtilClass.generateName(), UtilClass.generateAge(), UtilClass.generateNoOfSubs());
         if (personsIn[0] == null) {
             personsIn[0] = coach;
             System.out.println("Coach " + coach.name + " entered the Gym!");
@@ -36,7 +36,7 @@ public class FitnessGym {
     //Created a method to set add a subscriber to the gym, the trainer will be added to the array of persons in the gym, if the gym is open
     //and if the gym is not full.
     public void addSub() {
-        Subscriber sub = new Subscriber(UtilClass.generateName(), UtilClass.generateAge(), Person.counter, UtilClass.generateProgress());
+        Subscriber sub = new Subscriber(UtilClass.generateName(), UtilClass.generateAge(), UtilClass.generateProgress());
         if (personsIn[0] == null) {
             personsIn[0] = sub;
             System.out.println("Subscriber " + sub.name + " entered the Gym!");
@@ -68,11 +68,11 @@ public class FitnessGym {
         boolean isTrainer = false;
         for (Person elem:personsIn) {
             if (elem instanceof Trainer) {
-                ((Trainer) elem).printTrainer();
+                elem.printPerson();
                 isTrainer=true;
             }
         }
-        if (!isTrainer) System.out.println("there are no coaches in the gym.");
+        if (!isTrainer) System.out.println("There are no coaches in the gym.");
     }
 
     //Created a method to show the details of the subscribers in the gym,if any.
@@ -80,11 +80,11 @@ public class FitnessGym {
         boolean isSub = false;
         for (Person elem:personsIn) {
             if (elem instanceof Subscriber) {
-                ((Subscriber) elem).printSub();
+                elem.printPerson();
                 isSub=true;
             }
         }
-        if (!isSub) System.out.println("there are no subscribers in the gym.");
+        if (!isSub) System.out.println("There are no subscribers in the gym.");
     }
 
     //Created a method to show the max training progress from the subscribers in the gym.
@@ -100,7 +100,7 @@ public class FitnessGym {
         System.out.println("The highest level of subscribers is: " + maxLevel);
     }
 
-        //Created a method to remove a person from the gym based on the ID and throws an exception if the ID is not found.
+    //Created a method to remove a person from the gym based on the ID and throws an exception if the ID is not found.
     public void removePerson(int id) {
         try {
             for (int i = 0; i <= 2; i++) {
