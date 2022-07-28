@@ -21,13 +21,16 @@ public class FitnessGym {
         Trainer coach = new Trainer(UtilClass.generateName(), UtilClass.generateAge(), UtilClass.generateNoOfSubs());
         if (personsIn[0] == null) {
             personsIn[0] = coach;
+            occupation++;
             System.out.println("Coach " + coach.name + " entered the Gym!");
         } else if (personsIn[1] == null) {
             personsIn[1] = coach;
             System.out.println("Coach " + coach.name + " entered the Gym!");
+            occupation++;
         } else if (personsIn[2] == null) {
             personsIn[2] = coach;
             System.out.println("Coach " + coach.name + " entered the Gym!");
+            occupation++;
         } else {
             System.out.println("I'm afraid the Gym is full and coach " + coach.name + " cannot come in!");
         }
@@ -40,12 +43,15 @@ public class FitnessGym {
         if (personsIn[0] == null) {
             personsIn[0] = sub;
             System.out.println("Subscriber " + sub.name + " entered the Gym!");
+            occupation++;
         } else if (personsIn[1] == null) {
             personsIn[1] = sub;
             System.out.println("Subscriber " + sub.name + " entered the Gym!");
+            occupation++;
         } else if (personsIn[2] == null) {
             personsIn[2] = sub;
             System.out.println("Subscriber " + sub.name + " entered the Gym!");
+            occupation++;
         } else {
             System.out.println("I'm afraid the Gym is full and subscriber " + sub.name + " cannot come in!");
         }
@@ -55,15 +61,13 @@ public class FitnessGym {
     public void showPersons() {
         for (int i = 0; i <= 2; i++) {
             if (personsIn[i] != null) {
-                occupation++;
+                personsIn[i].printPerson();
             }
         }
         System.out.println("There are " + occupation + " people in the Gym.");
-        showCoaches();
-        showSubscribers();
     }
 
-    //Created a method to show the details of the coaches in the gym,if any.
+    //Created a method to show the details of only the coaches in the gym,if any.
     public void showCoaches(){
         boolean isTrainer = false;
         for (Person elem:personsIn) {
@@ -75,7 +79,7 @@ public class FitnessGym {
         if (!isTrainer) System.out.println("There are no coaches in the gym.");
     }
 
-    //Created a method to show the details of the subscribers in the gym,if any.
+    //Created a method to show the details of only the subscribers in the gym,if any.
     public void showSubscribers(){
         boolean isSub = false;
         for (Person elem:personsIn) {
@@ -101,20 +105,18 @@ public class FitnessGym {
     }
 
     //Created a method to remove a person from the gym based on the ID and throws an exception if the ID is not found.
-    public void removePerson(int id) {
-        try {
-            for (int i = 0; i <= 2; i++) {
-                if (personsIn[i] != null) {
-                    if (personsIn[i].id == id) {
-                        personsIn[i] = null;
-                        occupation--;
-                        System.out.println("Person with id " + id + " has been removed from the Gym.");
-                        break;
-                    }
-                }
+    public void removePerson(int id) throws ExceptionPersonDoesNotExist {
+        boolean isFound = false;
+        for (int i = 0; i <= 2; i++) {
+            if (personsIn[i] != null && personsIn[i].id == id) {
+                System.out.println("Person with id " + id + " has been removed from the Gym.");
+                personsIn[i] = null;
+                occupation--;
+                isFound = true;
             }
-        } catch (Exception e) {
-            System.out.println("Person with id " + id + " does not exist in the Gym.");
+            if (!isFound) {
+                throw new ExceptionPersonDoesNotExist();
+            }
         }
     }
 
@@ -125,7 +127,7 @@ public class FitnessGym {
     }
 
     //Created a method to go through all the actions that can be performed on the gym.
-    public void performAction(Actions action) {
+    public void performAction(Actions action) throws ExceptionPersonDoesNotExist {
         switch (action) {
             case OPEN_GYM:
                 openGym();

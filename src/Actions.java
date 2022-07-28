@@ -4,7 +4,6 @@ public enum Actions {
     ADD_TRAINER,
     ADD_SUBSCRIBER,
     SHOW_PERSONS,
-    SHOW_COACHES,
     SHOW_MAX_LEVEL,
     REMOVE_PERSON,
     CLOSE_GYM,

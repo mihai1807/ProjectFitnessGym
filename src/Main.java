@@ -9,8 +9,8 @@ public class Main {
         Actions [] actions2 = {Actions.SHOW_PERSONS};
         //Created an array of all the actions that can be performed on the Gym from the Actions enum in different order.
         Actions [] actions3 = {Actions.OPEN_GYM, Actions.ADD_TRAINER, Actions.ADD_SUBSCRIBER, Actions.ADD_SUBSCRIBER,
-                Actions.ADD_SUBSCRIBER,Actions.SHOW_PERSONS, Actions.SHOW_COACHES,
-                Actions.SHOW_MAX_LEVEL, Actions.REMOVE_PERSON,Actions.REMOVE_PERSON,Actions.SHOW_PERSONS, Actions.CLOSE_GYM};
+                                Actions.ADD_SUBSCRIBER,Actions.SHOW_PERSONS, Actions.SHOW_MAX_LEVEL, Actions.REMOVE_PERSON,
+                                Actions.REMOVE_PERSON,Actions.SHOW_PERSONS, Actions.CLOSE_GYM};
 
 //        //Created a for loop to go through the array "actions".
 //        for (Actions action : actions) {
@@ -28,7 +28,11 @@ public class Main {
 
         //Created a for loop to go through the array "actions3" in a different order.
         for (Actions action : actions3) {
-            gym.performAction(action);
+            try {
+                gym.performAction(action);
+            } catch (ExceptionPersonDoesNotExist e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
